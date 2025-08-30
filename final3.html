@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premier Schools Exhibition</title>
+    <style>
+     
+        @import url('https://fonts.googleapis.com/css2?family=Federo&family=Noto+Sans+JP:wght@100..900&display=swap');
+        
+        body {
+            margin: 0;
+            font-family: 'Federo', sans-serif;
+            background: linear-gradient(135deg, #6c5ce7 0%, #2b2a6a 100%);
+            color: white;
+        }
+
+        .header {
+            position: relative;
+            padding: 20px;
+            background: linear-gradient(135deg, #6c5ce7 0%, #2b2a6a 100%);
+        }
+
+        .logo {
+            width: 100px;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+
+        .register-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: linear-gradient(135deg, #6c5ce7 0%, #2b2a6a 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .main-container {
+            display: flex;
+            padding: 50px 20px;
+        }
+
+        .left-section {
+            flex: 1;
+            padding-right: 50px;
+        }
+
+        .title {
+            font-family: 'Federo', sans-serif;
+            font-size: 56px;
+            line-height: 1.3;
+            color: #FFD700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .event-details {
+            background: rgba(249, 241, 23, 0.816);
+            color:#39307b;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .image-grid {
+            flex: 1;
+            height: 800px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animated-div {
+            width: calc(33.33% - 40px);
+            height: 350px;
+            border-radius: 25px;
+            position: absolute;
+            transform: translateY(800px);
+            margin: 0 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .form-section {
+            flex: 0.5;
+            padding-left: 50px;
+        }
+
+        .form-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #6c5ce7 0%, #2b2a6a 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @keyframes moveUp {
+            0% { transform: translateY(800px); }
+            100% { transform: translateY(-350px); }
+        }
+
+        .column-1 { left: 0; }
+        .column-2 { left: 33.33%; }
+        .column-3 { left: 66.66%; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="./assets/logo.png" alt="Logo" class="logo">
+        <button class="register-btn">REGISTER NOW</button>
+    </div>
+
+    <div class="main-container">
+        <div class="left-section">
+            <h1 class="title">Discover Gurugram's Top 30+ Schools ALL IN ONE PLACE</h1>
+            <div class="event-details">
+                <div class="event-location">Apparel House, Sec 44, Gurugram</div>
+                <div class="event-date">2-3 August 2025</div>
+                <div class="event-time">Sat-Sun | 10AM - 6PM</div>
+            </div>
+        </div>
+
+        <div class="image-grid" id="imageGrid">
+            <!-- Divs will be dynamically added here -->
+        </div>
+
+        <div class="form-section">
+            <h2 class="form-title">Enquire Now</h2>
+            <input type="text" class="input-field" placeholder="Parent's Name">
+            <input type="tel" class="input-field" placeholder="Phone number">
+            <input type="text" class="input-field" placeholder="Which grade are you looking for?">
+            <button class="submit-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+              </svg>Submit</button>
+        </div>
+    </div>
+
+    <script>
+        
+        const rowColors = [
+            ['#FF6B6B', '#4ECDC4', '#45B7D1'], // row
+            ['#96CEB4', '#FFEEAD', '#FF7979'], 
+            ['#6C3483', '#B795D1', '#F9E79F']  
+        ];
+
+        function createDiv(color, columnIndex) {
+            const div = document.createElement('div');
+            div.className = `animated-div column-${columnIndex + 1}`;
+            div.style.backgroundColor = color;
+            return div;
+        }
+
+        function setupAnimation() {
+            const grid = document.getElementById('imageGrid');
+            grid.innerHTML = '';
+            
+    
+            rowColors.forEach((row, rowIndex) => {
+                row.forEach((color, columnIndex) => {
+                    const div = createDiv(color, columnIndex);
+                    
+             
+                    const animationDuration = 10; // 10 seconds 
+                    const rowDelay = rowIndex * 3500; // 3.5 second 
+                    
+                    div.style.animation = `moveUp ${animationDuration}s linear infinite`;
+                    div.style.animationDelay = `${rowDelay}ms`;
+                    
+                    grid.appendChild(div);
+                });
+            });
+        }
+
+        setupAnimation();
+
+        window.addEventListener('resize', setupAnimation);
+    </script>
+</body>
+</html>
